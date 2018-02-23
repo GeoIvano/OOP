@@ -79,22 +79,22 @@ Restaurant.prototype.addCook = function(cook) {
 Restaurant.prototype.order = function(mesnoLiE) {
     var gotvach = this.cooks[Math.floor(Math.random() * this.cooks.length)];
     while (gotvach instanceof Chef) {
-        gotvach.narejdai();
+        gotvach.arrange();
         gotvach = this.cooks[Math.floor(Math.random() * this.cooks.length)];
     }
     if (gotvach instanceof SaladMaker) {
-        gotvach.beli();
-        gotvach.reji();
+        gotvach.cut();
+        gotvach.rint();
     }
-    var qdene = gotvach.gotvi(mesnoLiE);
-    if (qdene instanceof Mesno) {
-        qdene.lai();
+    var meal = gotvach.gotvi(mesnoLiE);
+    if (meal instanceof Mesno) {
+        meal.lai();
     }
-    if (qdene instanceof Posno) {
-        qdene.stayHungry();
+    if (meal instanceof Posno) {
+        meal.stayHungry();
     }
     var waiter = this.waiters[Math.floor(Math.random() * this.waiters.length)];
-    document.write(`<p>Me ${gotvach.name} have prepared for you ${qdene.name}</p><img src="${qdene.url}" width="200px"  alt="${qdene.name}"/><p>${waiter.name} will bring it to you`);
+    document.write(`<p>Me ${gotvach.name} have prepared for you ${meal.name}</p><img src="${meal.url}" width="200px"  alt="${meal.name}"/><p>${waiter.name} will bring it to you`);
 
     waiter.nosi();
 }
@@ -115,19 +115,19 @@ extend(Cook, Person);
 Cook.prototype.gotvi = function(mesnoLiE) {
 
     if (mesnoLiE) {
-        var qdene = MESNI_QSTIQ[Math.floor(Math.random() * MESNI_QSTIQ.length)];
+        var meal = MESNI_QSTIQ[Math.floor(Math.random() * MESNI_QSTIQ.length)];
     } else {
-        var qdene = POSNI_QSTIQ[Math.floor(Math.random() * POSNI_QSTIQ.length)];
+        var meal = POSNI_QSTIQ[Math.floor(Math.random() * POSNI_QSTIQ.length)];
     }
 
-    return qdene;
+    return meal;
 }
 
 function Chef(name) {
     Cook.call(this, name);
 }
 extend(Chef, Cook);
-Chef.prototype.narejdai = function() {
+Chef.prototype.arrange = function() {
     document.write('<p>I won`t cook you cook</p>');
 }
 
@@ -135,10 +135,10 @@ function SaladMaker(name) {
     Cook.call(this, name);
 }
 extend(SaladMaker, Cook);
-SaladMaker.prototype.reji = function() {
+SaladMaker.prototype.rint = function() {
     document.write('<p>I cut</p>');
 }
-SaladMaker.prototype.beli = function() {
+SaladMaker.prototype.cut = function() {
     document.write('<p>I rind</p>');
 }
 
