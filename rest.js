@@ -3,32 +3,32 @@ function Food(name, url) {
     this.url = url;
 }
 
-function Mesno(name, url) {
+function withMeat(name, url) {
     Food.call(this, name, url);
 }
-extend(Mesno, Food);
-Mesno.prototype.lai = function() {
+extend(withMeat, Food);
+withMeat.prototype.bark = function() {
     document.write('<p>Bau-Bau</p>');
 }
 
-function Posno(name, url) {
+function withoutMeat(name, url) {
     Food.call(this, name, url);
 }
-extend(Posno, Food);
-Posno.prototype.stayHungry = function() {
+extend(withoutMeat, Food);
+withoutMeat.prototype.stayHungry = function() {
     document.write('<p>I am hungry</p>');
 }
-const MESNI_QSTIQ = [new Mesno('Pizza', 'https://www.cicis.com/media/1243/pizza_adven_zestypepperoni.png'),
-    new Mesno('Sudjuk', 'http://dahapna.co.uk/image/cache/data/products/11357-380x380.png'),
-    new Mesno('Kebabche', 'http://chorbadjii.com/wp-content/uploads/2014/02/%D0%A1%D0%BA%D0%B0%D1%80%D0%B0-%D0%9A%D0%B5%D0%B1%D0%B0%D0%BF%D1%87%D0%B5%D1%82%D0%B0-1.png'),
-    new Mesno('Parjola', 'http://chorbadjii.com/wp-content/uploads/2014/02/%D0%A1%D0%BA%D0%B0%D1%80%D0%B0-%D0%9F%D0%B8%D0%BB%D0%B5%D1%88%D0%BA%D0%B0-%D0%BF%D1%8A%D1%80%D0%B6%D0%BE%D0%BB%D0%B0-%D1%84%D0%B8%D0%BB%D0%B5.png'),
-    new Mesno('Sarchica', 'http://chorbadjii.com/wp-content/uploads/2014/02/%D0%9F%D0%B8%D0%BB%D0%B5%D1%88%D0%BA%D0%B8-%D0%B2%D0%BE%D0%B4%D0%B5%D0%BD%D0%B8%D1%87%D0%BA%D0%B8-%D1%81-%D0%BB%D1%83%D0%BA.png')
+const FOOD_WITH_MEAT = [new withMeat('Pizza', 'https://www.cicis.com/media/1243/pizza_adven_zestypepperoni.png'),
+    new withMeat('Sudjuk', 'http://dahapna.co.uk/image/cache/data/products/11357-380x380.png'),
+    new withMeat('Kebabche', 'http://chorbadjii.com/wp-content/uploads/2014/02/%D0%A1%D0%BA%D0%B0%D1%80%D0%B0-%D0%9A%D0%B5%D0%B1%D0%B0%D0%BF%D1%87%D0%B5%D1%82%D0%B0-1.png'),
+    new withMeat('Parjola', 'http://chorbadjii.com/wp-content/uploads/2014/02/%D0%A1%D0%BA%D0%B0%D1%80%D0%B0-%D0%9F%D0%B8%D0%BB%D0%B5%D1%88%D0%BA%D0%B0-%D0%BF%D1%8A%D1%80%D0%B6%D0%BE%D0%BB%D0%B0-%D1%84%D0%B8%D0%BB%D0%B5.png'),
+    new withMeat('Sarchica', 'http://chorbadjii.com/wp-content/uploads/2014/02/%D0%9F%D0%B8%D0%BB%D0%B5%D1%88%D0%BA%D0%B8-%D0%B2%D0%BE%D0%B4%D0%B5%D0%BD%D0%B8%D1%87%D0%BA%D0%B8-%D1%81-%D0%BB%D1%83%D0%BA.png')
 ];
-const POSNI_QSTIQ = [new Posno('Salata', 'https://www.burgerking.com.tr/cmsfiles/products/king-delight-akdeniz-salata-1.png?v=94'),
-    new Posno('Tarator', 'http://kapripizza.com/wp-content/uploads/2015/09/pizza-capri-tarator.png'),
-    new Posno('Treva', 'https://cdn.pixabay.com/photo/2017/02/01/11/25/background-2029771_960_720.png'),
-    new Posno('Pure', 'http://www.za100lie.com/images/1480489688.png'),
-    new Posno('Banani', 'https://goingbananasvrg.files.wordpress.com/2013/05/cropped-bananas.png')
+const FOOD_WITHOUT_MEAT = [new withoutMeat('Salata', 'https://www.burgerking.com.tr/cmsfiles/products/king-delight-akdeniz-salata-1.png?v=94'),
+    new withoutMeat('Tarator', 'http://kapripizza.com/wp-content/uploads/2015/09/pizza-capri-tarator.png'),
+    new withoutMeat('Treva', 'https://cdn.pixabay.com/photo/2017/02/01/11/25/background-2029771_960_720.png'),
+    new withoutMeat('Pure', 'http://www.za100lie.com/images/1480489688.png'),
+    new withoutMeat('Banani', 'https://goingbananasvrg.files.wordpress.com/2013/05/cropped-bananas.png')
 ];
 
 function extend(constr1, constr2) {
@@ -76,7 +76,7 @@ Restaurant.prototype.addCook = function(cook) {
         }
     }
 }
-Restaurant.prototype.order = function(mesnoLiE) {
+Restaurant.prototype.order = function(isWithMeat) {
     var gotvach = this.cooks[Math.floor(Math.random() * this.cooks.length)];
     while (gotvach instanceof Chef) {
         gotvach.arrange();
@@ -84,19 +84,19 @@ Restaurant.prototype.order = function(mesnoLiE) {
     }
     if (gotvach instanceof SaladMaker) {
         gotvach.cut();
-        gotvach.rint();
+        gotvach.rind();
     }
-    var meal = gotvach.gotvi(mesnoLiE);
-    if (meal instanceof Mesno) {
-        meal.lai();
+    var meal = gotvach.gotvi(isWithMeat);
+    if (meal instanceof withMeat) {
+        meal.bark();
     }
-    if (meal instanceof Posno) {
+    if (meal instanceof withoutMeat) {
         meal.stayHungry();
     }
     var waiter = this.waiters[Math.floor(Math.random() * this.waiters.length)];
     document.write(`<p>Me ${gotvach.name} have prepared for you ${meal.name}</p><img src="${meal.url}" width="200px"  alt="${meal.name}"/><p>${waiter.name} will bring it to you`);
 
-    waiter.nosi();
+    waiter.bring();
 }
 
 function Waiter(name, staj) {
@@ -104,7 +104,7 @@ function Waiter(name, staj) {
     this.staj = staj;
 }
 extend(Waiter, Person);
-Waiter.prototype.nosi = function() {
+Waiter.prototype.bring = function() {
     document.write("<p>I bring you</p>");
 }
 
@@ -112,12 +112,12 @@ function Cook(name) {
     Person.call(this, name);
 }
 extend(Cook, Person);
-Cook.prototype.gotvi = function(mesnoLiE) {
+Cook.prototype.gotvi = function(isWithMeat) {
 
-    if (mesnoLiE) {
-        var meal = MESNI_QSTIQ[Math.floor(Math.random() * MESNI_QSTIQ.length)];
+    if (isWithMeat) {
+        var meal = FOOD_WITH_MEAT[Math.floor(Math.random() * FOOD_WITH_MEAT.length)];
     } else {
-        var meal = POSNI_QSTIQ[Math.floor(Math.random() * POSNI_QSTIQ.length)];
+        var meal = FOOD_WITHOUT_MEAT[Math.floor(Math.random() * FOOD_WITHOUT_MEAT.length)];
     }
 
     return meal;
@@ -135,10 +135,10 @@ function SaladMaker(name) {
     Cook.call(this, name);
 }
 extend(SaladMaker, Cook);
-SaladMaker.prototype.rint = function() {
+SaladMaker.prototype.cut = function() {
     document.write('<p>I cut</p>');
 }
-SaladMaker.prototype.cut = function() {
+SaladMaker.prototype.rind = function() {
     document.write('<p>I rind</p>');
 }
 
